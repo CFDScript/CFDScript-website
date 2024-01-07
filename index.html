@@ -34,9 +34,10 @@
       img.title { height: 1em; }
       pre { background-color: #f2f2f2; width: fit-content; margin: 0; padding: 10; overflow-x: auto; }
     </style>
+    
+    <!-- Import the run_prettify.js library for JavaScript code coloring -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script> <!-- depreciated library -->
   </head>
-
-  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
   <body>
     <h1 class="top">CFDScript&nbsp;<img class="title"
@@ -65,7 +66,7 @@
 
     <p>
       CFDScript is still under development and new features and improvements are constantly being added. 
-      You can download the latest version of CFDScript from the Git repository: <a href="https://github.com/nikoscham/CFDScript" target="_blank">https://github.com/nikoscham/CFDScript</a>.
+      You can download the latest version of CFDScript from the Git repository: <a href="https://github.com/CFDScript/CFDScript" target="_blank">https://github.com/CFDScript/CFDScript</a>.
     </p>
 
     <h2 id="documentation"><a name="Documentation"></a>Documentation</h2>
@@ -124,18 +125,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
   plotSol2D(u, nx, ny, axpt, aypt); // Visualise the solution
 });
 &lt;/script&gt;</pre>
-<p>
-  Finally, an HTML container element is required on the page to display the plotted results.
-</p>
-<pre class="prettyprint">
+    <p>
+      Finally, an HTML container element is required on the page to display the plotted results.
+    </p>
+    <pre class="prettyprint">
 &lt;div id="plot">&lt;/div&gt</pre>
     
     <p>
-      Visit the <a href="https://www.cfdscript.com/exampleHeatTrasnfer.html" target="_blank">example page</a> for a detailed mathematical description of the heat transfer problem, along with a demonstration of the provided code. Please report all issues here: <a href="https://github.com/nikoscham/CFDScript/issues" target="_blank">https://github.com/nikoscham/CFDScript/issues</a>.
+      Visit the <a href="https://www.cfdscript.com/exampleHeatTrasnfer.html" target="_blank">example page</a> for a detailed mathematical description of the heat transfer problem, along with a demonstration of the provided code. Please report all issues here: <a href="https://github.com/CFDScript/CFDScript/issues" target="_blank">https://github.com/CFDScript/CFDScript/issues</a>.
     </p>
     <h2 id="licensing"><a name="Licensing"></a>Licensing</h2>
     <p>
-      CFDScript is distributed under the terms of the <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Creative Commons Attribution-NonCommercial 4.0 International License</a>. Copyright 2023 CFDScript.
+      CFDScript is distributed under the terms of the <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Creative Commons Attribution-NonCommercial 4.0 International License</a>. Copyright &copy; 2023 CFDScript.
     </p>
  
   </body>
