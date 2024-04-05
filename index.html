@@ -86,21 +86,23 @@
 &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js">&lt;/script&gt;
 
 &lt;script&gt;
-  const nex = 8; // Number of elements in x-direction
-  const ney = 4; // Number of elements in y-direction
-  const xlast = 4; // Max x-coordinate (m) of the domain
-  const ylast = 2; // Max y-coordinate (m) of the domain
+  const compuMesh = {
+    nex: 8, // Number of elements in x-direction
+    ney: 4, // Number of elements in y-direction
+    xlast: 4, // Max x-coordinate (m) of the domain
+    ylast: 2, // Max y-coordinate (m) of the domain
+  }
   const boundaryConditions = {
-    robinTop: true, // Set a Robin boundary condition at the top of the domain
-    robinBottom: false, // Set a Robin boundary condition at the bottom of the domain
-    robinLeft: false, // Set a Robin boundary condition at the left side of the domain
-    robinRight: false, // Set a Robin boundary condition at the right side of the domain
+    robinTop: true, // Robin boundary condition flag at the top of the domain
+    robinBottom: false, // Robin boundary condition flag at the bottom of the domain
+    robinLeft: false, // Robin boundary condition flag at the left side of the domain
+    robinRight: false, // Robin boundary condition flag at the right side of the domain
     robinHeatTranfCoeff: 1, // Heat transfer coefficient (m<sup>-1</sup>) (in case of a Robin boundary condition)
     robinExtTemp: 20, // External temperature (&deg;C) (in case of a Robin boundary condition)
-    dirichletTop: false, // Set a Dirichlet boundary condition at the top of the domain
-    dirichletBottom: true, // Set a Dirichlet boundary condition at the bottom of the domain
-    dirichletLeft: false, // Set a Dirichlet boundary condition at the left side of the domain
-    dirichletRight: true, // Set a Dirichlet boundary condition at the right side of the domain
+    dirichletTop: false, // Dirichlet boundary condition flag at the top of the domain
+    dirichletBottom: true, // Dirichlet boundary condition flag at the bottom of the domain
+    dirichletLeft: false, // Dirichlet boundary condition flag at the left side of the domain
+    dirichletRight: true, // Dirichlet boundary condition flag at the right side of the domain
     dirichletValueTop: 0.0, // Temperature value (&deg;C) at the top of the domain (in case of a Dirichlet boundary condition)
     dirichletValueBottom: 200.0, // Temperature value (&deg;C) at the bottom of the domain (in case of a Dirichlet boundary condition)
     dirichletValueLeft: 0.0, // Temperature value (&deg;C) at the left side of the domain (in case of a Dirichlet boundary condition)
@@ -121,7 +123,7 @@ import { chkSolidHeatBoundCond, CFDScriptVersion } from 'https://cfdscript.githu
 window.addEventListener('DOMContentLoaded', (event) => {
   CFDScriptVersion() // Print CFDScript version
   chkSolidHeatBoundCond(boundaryConditions); // Check boundary conditions
-  let { u, nx, ny, axpt, aypt } = CFDScript(nex, ney, xlast, ylast, 'solidHeatScript', boundaryConditions) // Assembly matrices and solve the system of equations
+  let { u, nx, ny, axpt, aypt } = CFDScript('solidHeatScript', compuMesh, boundaryConditions) // Assembly matrices and solve the system of equations
   plotSol2D(u, nx, ny, axpt, aypt); // Visualise the solution
 });
 &lt;/script&gt;</pre>
