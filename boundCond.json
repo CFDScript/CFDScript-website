@@ -1,0 +1,16 @@
+{
+    "robinTop": true,
+    "robinBottom": false,
+    "robinLeft": false,
+    "robinRight": false,
+    "robinHeatTranfCoeff": 1,
+    "robinExtTemp": 20,
+    "dirichletTop": false,
+    "dirichletBottom": true,
+    "dirichletLeft": false,
+    "dirichletRight": true,
+    "dirichletValueTop": 0.0,
+    "dirichletValueBottom": 200.0,
+    "dirichletValueLeft": 0.0,
+    "dirichletValueRight": 200.0
+  }
