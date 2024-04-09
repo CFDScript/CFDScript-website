@@ -73,29 +73,23 @@
     </ul>
 
     <script>
-      const compuMesh = {
-        nex: 8, // Number of elements in x-direction
-        ney: 4, // Number of elements in y-direction
-        xlast: 4, // Max x-coordinate (m) of the domain
-        ylast: 2, // Max y-coordinate (m) of the domain
+      let compuMesh, boundCond;
+
+      // Function to fetch and parse JSON files
+      function fetchJSON(url) {
+          return fetch(url)
+              .then(response => response.json());
       }
-      const boundCond = {
-        robinTop: true, // Robin boundary condition flag at the top of the domain
-        robinBottom: false, // Robin boundary condition flag at the bottom of the domain
-        robinLeft: false, // Robin boundary condition flag at the left side of the domain
-        robinRight: false, // Robin boundary condition flag at the right side of the domain
-        robinHeatTranfCoeff: 1, // Heat transfer coefficient (m<sup>-1</sup>) (in case of a Robin boundary condition)
-        robinExtTemp: 20, // External temperature (&deg;C) (in case of a Robin boundary condition)
-        dirichletTop: false, // Dirichlet boundary condition flag at the top of the domain
-        dirichletBottom: true, // Dirichlet boundary condition flag at the bottom of the domain
-        dirichletLeft: false, // Dirichlet boundary condition flag at the left side of the domain
-        dirichletRight: true, // Dirichlet boundary condition flag at the right side of the domain
-        dirichletValueTop: 0.0, // Temperature value (&deg;C) at the top of the domain (in case of a Dirichlet boundary condition)
-        dirichletValueBottom: 200.0, // Temperature value (&deg;C) at the bottom of the domain (in case of a Dirichlet boundary condition)
-        dirichletValueLeft: 0.0, // Temperature value (&deg;C) at the left side of the domain (in case of a Dirichlet boundary condition)
-        dirichletValueRight: 200.0, // Temperature value (&deg;C) at the right side of the domain (in case of a Dirichlet boundary condition)
-      };
-    </script>
+
+      // Fetch all JSON files asynchronously
+      Promise.all([
+          fetchJSON('./compuMesh.json'), // Computational mesh configuration file
+          fetchJSON('./boundCond.json') // Boundary conditions configuration file
+      ]).then(([compuMeshData, boundCondData]) => {
+          compuMesh = compuMeshData;
+          boundCond = boundCondData;
+      });
+  </script>
 
     <script type="module">
       // Import the CFDscript library (for running JavaScript in local HTML files see here: https://stackoverflow.com/questions/58067499/runing-javascript-in-local-html-files-in-firefox)
