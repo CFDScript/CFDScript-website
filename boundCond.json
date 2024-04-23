@@ -1,16 +1,8 @@
 {
-    "robinTop": true,
-    "robinBottom": false,
-    "robinLeft": false,
-    "robinRight": false,
+    "topBound": ["robin", 0.0],
+    "bottomBound": ["dirichlet", 200.0],
+    "leftBound": ["neumann", 0.0],
+    "rightBound": ["dirichlet", 200.0],
     "robinHeatTranfCoeff": 1,
-    "robinExtTemp": 20,
-    "dirichletTop": false,
-    "dirichletBottom": true,
-    "dirichletLeft": false,
-    "dirichletRight": true,
-    "dirichletValueTop": 0.0,
-    "dirichletValueBottom": 200.0,
-    "dirichletValueLeft": 0.0,
-    "dirichletValueRight": 200.0
+    "robinExtTemp": 20
   }
