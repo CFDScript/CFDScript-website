@@ -57,16 +57,16 @@
     </ul>
 
     <p>
-      CFDScript is a JavaScript library for solving Partial Differential Equations (PDE) using the Finite Element Method (FEM). 
-      It allows you to create and run browser-based simulations of physics and engineering problems. 
-      CFDScript also provides visualization tools to plot the results of your simulations.
+      CFDScript is a JavaScript library that is designed to solve Partial Differential Equations (PDE) using the Finite Element Method (FEM). 
+      It enables the creation and running of browser-based simulations for physics and engineering problems. 
+      Visualization tools are also provided by CFDScript to display the results of simulations.
     </p>
     
     <h2 id="download"><a name="Download"></a>Download</h2>
 
     <p>
-      CFDScript is still under development and new features and improvements are constantly being added. 
-      You can download the latest version of CFDScript from the Git repository: <a href="https://github.com/CFDScript/CFDScript" target="_blank">https://github.com/CFDScript/CFDScript</a>.
+      CFDScript is currently under development with continuous addition of new features and improvements. 
+      The latest version of CFDScript can be downloaded from the Git repository: <a href="https://github.com/CFDScript/CFDScript" target="_blank">https://github.com/CFDScript/CFDScript</a>.
     </p>
 
     <h2 id="documentation"><a name="Documentation"></a>Documentation</h2>
@@ -74,44 +74,70 @@
     <h3>Usage example (Heat transfer on a 2D solid)</h3>
 
     <p>
-      Here, we demonstrate how to utilize the CFDScript library to address a stationary heat transfer problem on a 2D rectangular domain. 
-      The scripts provided below should be incorporated into your HTML page. The initial step involves importing the <a href="https://mathjs.org/" target="_blank">Math.js</a> and <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a> libraries, essential for solving the system of equations and visualizing the solution. 
-      Subsequently, the code defines various problem parameters, including the number of elements, domain boundaries, and boundary conditions. 
-      The boundary conditions can be specified as Dirichlet or Robin types. 
-      In particular, the Dirichlet condition sets a constant temperature value whereas the Robin condition governs a convective heat transfer scenario, enabling users to define a custom heat transfer coefficient and an external temperature. 
-      In cases where the boundary condition is not explicitly defined, it is considered as a Neumann (zero-flux) type.
+      A demonstration is provided below on how to utilize the CFDScript library for addressing a stationary heat transfer problem on a 2D rectangular domain. 
+      The following scripts should be included in the HTML page. 
+      The initial step involves the importation of the <a href="https://mathjs.org/" target="_blank">Math.js</a> and <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a> libraries, which are essential for solving the system of equations and visualizing the solution.
     </p>
     <pre class="prettyprint">
 &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js">&lt;/script&gt;
-&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js">&lt;/script&gt;
-
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js">&lt;/script&gt;</pre>
+    <p>
+      Following this, various problem parameters, such as the number of elements, domain boundaries, and boundary conditions, are defined using external <a href="https://www.w3schools.com/js/js_json_intro.asp" target="_blank">JSON</a> files. 
+      The first JSON file is the computational mesh configuration file (compuMesh.json):
+    </p>
+    <pre class="prettyprint">
+{
+  "nex": 8,
+  "ney": 4,
+  "xlast": 4,
+  "ylast": 2
+}</pre>
+    <p>
+      In this example, the parameters nex and ney represent the number of elements along the x-axis and y-axis, respectively. 
+      Additionally, xlast and ylast denote the final x-coordinate and y-coordinate of the mesh, respectively. 
+      The second essential JSON file is the boundary conditions configuration file (boundCond.json).  
+      Boundary conditions can be specified as Dirichlet, Robin, or Neumann types.
+      The Dirichlet condition sets a constant temperature value, while the Robin condition describes a convective heat transfer scenario, allowing users to define a custom heat transfer coefficient and an external temperature. 
+      The Neumann boundary condition represents a zero-flux type.
+      The boundary conditions configuration file is structured as follows:
+    </p>
+    <pre class="prettyprint">
+{
+  "topBound": ["robin", "dummy"],
+  "bottomBound": ["dirichlet", 200.0],
+  "leftBound": ["neumann", "dummy"],
+  "rightBound": ["dirichlet", 200.0],
+  "robinHeatTranfCoeff": 1,
+  "robinExtTemp": 20
+}</pre>
+    <p>
+      In the provided example, the second argument for a Dirichlet boundary condition corresponds to the constant temperature value. 
+      For a Robin boundary condition, the parameter robinHeatTranfCoeff represents the heat transfer coefficient, and robinExtTemp indicates the external temperature.
+      These JSON files are fetched using the following script:
+    </p>
+    <pre class="prettyprint">
 &lt;script&gt;
-  const compuMesh = {
-    nex: 8, // Number of elements in x-direction
-    ney: 4, // Number of elements in y-direction
-    xlast: 4, // Max x-coordinate (m) of the domain
-    ylast: 2, // Max y-coordinate (m) of the domain
-  }
-  const boundaryConditions = {
-    robinTop: true, // Robin boundary condition flag at the top of the domain
-    robinBottom: false, // Robin boundary condition flag at the bottom of the domain
-    robinLeft: false, // Robin boundary condition flag at the left side of the domain
-    robinRight: false, // Robin boundary condition flag at the right side of the domain
-    robinHeatTranfCoeff: 1, // Heat transfer coefficient (m<sup>-1</sup>) (in case of a Robin boundary condition)
-    robinExtTemp: 20, // External temperature (&deg;C) (in case of a Robin boundary condition)
-    dirichletTop: false, // Dirichlet boundary condition flag at the top of the domain
-    dirichletBottom: true, // Dirichlet boundary condition flag at the bottom of the domain
-    dirichletLeft: false, // Dirichlet boundary condition flag at the left side of the domain
-    dirichletRight: true, // Dirichlet boundary condition flag at the right side of the domain
-    dirichletValueTop: 0.0, // Temperature value (&deg;C) at the top of the domain (in case of a Dirichlet boundary condition)
-    dirichletValueBottom: 200.0, // Temperature value (&deg;C) at the bottom of the domain (in case of a Dirichlet boundary condition)
-    dirichletValueLeft: 0.0, // Temperature value (&deg;C) at the left side of the domain (in case of a Dirichlet boundary condition)
-    dirichletValueRight: 200.0, // Temperature value (&deg;C) at the right side of the domain (in case of a Dirichlet boundary condition)
-  };
+    let compuMesh, boundCond;
+    // Function to fetch and parse JSON files
+    function fetchJSON(url) {
+      return fetch(url)
+        .then(response => response.json());
+    }
+    // Fetch all JSON files asynchronously
+    Promise.all([
+      fetchJSON('./compuMesh.json'), // Computational mesh configuration file
+      fetchJSON('./boundCond.json') // Boundary conditions configuration file
+    ]).then(([compuMeshData, boundCondData]) => {
+      compuMesh = compuMeshData;
+      boundCond = boundCondData;
+    });
 &lt;/script&gt;</pre>
     <p>
-      Next, we import the CFDScript library. We will use the solidHeatScript solver, which is a module of the CFDScript library that implements the Finite Element Method for heat conduction problems. 
-      The solver takes the number of elements, the domain dimensions, and the boundary conditions as inputs, and returns the grid points and the solution vector as outputs. We then visualize the solution in a contour plot.
+      Subsequently, the solidHeatScript solver, a module of the CFDScript library, is utilized. 
+      This solver implements the Finite Element Method for heat conduction problems. 
+      The solver accepts the number of elements, domain dimensions, and boundary conditions as inputs and returns the grid points (axpt, aypt) and the solution vector (u) as outputs. 
+      Finally, the solution is visualized in the form of a contour plot.
+      The following script demonstrates these steps:
     </p>
     <pre class="prettyprint">
 &lt;script type="module"&gt;
@@ -122,19 +148,20 @@ import { chkSolidHeatBoundCond, CFDScriptVersion } from 'https://cfdscript.githu
 
 window.addEventListener('DOMContentLoaded', (event) => {
   CFDScriptVersion() // Print CFDScript version
-  chkSolidHeatBoundCond(boundaryConditions); // Check boundary conditions
-  let { u, nx, ny, axpt, aypt } = CFDScript('solidHeatScript', compuMesh, boundaryConditions) // Assembly matrices and solve the system of equations
+  chkSolidHeatBoundCond(boundCond); // Check boundary conditions
+  let { u, nx, ny, axpt, aypt } = CFDScript('solidHeatScript', compuMesh, boundCond) // Assembly matrices and solve the system of equations
   plotSol2D(u, nx, ny, axpt, aypt); // Visualise the solution
 });
 &lt;/script&gt;</pre>
     <p>
-      Finally, an HTML container element is required on the page to display the plotted results.
+      To display the plotted results, an HTML container element is also required on the page.
     </p>
     <pre class="prettyprint">
 &lt;div id="plot">&lt;/div&gt</pre>
     
     <p>
-      Visit the <a href="https://www.cfdscript.com/exampleHeatTrasnfer.html" target="_blank">example page</a> for a detailed mathematical description of the heat transfer problem, along with a demonstration of the provided code. Please report all issues here: <a href="https://github.com/CFDScript/CFDScript/issues" target="_blank">https://github.com/CFDScript/CFDScript/issues</a>.
+      For a comprehensive understanding of the heat transfer problem and a demonstration of the provided code, please visit the <a href="https://www.cfdscript.com/exampleHeatTrasnfer.html" target="_blank">example page</a>. 
+      All issues and feedback should be directed to the following GitHub repository: <a href="https://github.com/CFDScript/CFDScript/issues" target="_blank">https://github.com/CFDScript/CFDScript/issues</a>.
     </p>
     <h2 id="licensing"><a name="Licensing"></a>Licensing</h2>
     <p>
