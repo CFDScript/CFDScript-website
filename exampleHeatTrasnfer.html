@@ -98,7 +98,6 @@
       
       // The functions will be executed as soon as the page finishes loading
       window.addEventListener('DOMContentLoaded', (event) => {
-        CFDScriptVersion() // Print CFDScript version
         let { u, nx, ny, axpt, aypt } = CFDScript('solidHeatScript', compuMesh, boundCond); // Assembly matrices and solve the system of equations
         plotSol2D(u, nx, ny, axpt, aypt); // Visualise the solution
       })

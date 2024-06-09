@@ -146,7 +146,6 @@ import { CFDScript } from 'https://cfdscript.github.io/CFDScript/src/CFDScript.j
 import { plotSol2D } from 'https://cfdscript.github.io/CFDScript/src/plotSolScript.js';
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  CFDScriptVersion() // Print CFDScript version
   let { u, nx, ny, axpt, aypt } = CFDScript('solidHeatScript', compuMesh, boundCond) // Assembly matrices and solve the system of equations
   plotSol2D(u, nx, ny, axpt, aypt); // Visualise the solution
 });
