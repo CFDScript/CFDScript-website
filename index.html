@@ -117,7 +117,7 @@
     </p>
     <pre class="prettyprint">
 &lt;script&gt;
-    let compuMesh, boundaryConditions;
+    let meshConfig, boundaryConditions;
     // Function to fetch and parse JSON files
     function fetchJSON(url) {
       return fetch(url)
@@ -125,11 +125,11 @@
     }
     // Fetch all JSON files asynchronously
     Promise.all([
-      fetchJSON('./compuMesh.json'), // Computational mesh configuration file
+      fetchJSON('./meshConfig.json'), // Computational mesh configuration file
       fetchJSON('./boundaryConditions.json') // Boundary conditions configuration file
-    ]).then(([compuMeshData, boundCondData]) => {
-      compuMesh = compuMeshData;
-      boundaryConditions = boundCondData;
+    ]).then(([meshConfigData, boundaryConditionsData]) => {
+      meshConfig = meshConfigData;
+      boundaryConditions = boundaryConditionsData;
     });
 &lt;/script&gt;</pre>
     <p>
@@ -149,7 +149,7 @@ import { chkSolidHeatboundaryConditions, CFDScriptVersion } from 'https://cfdscr
 window.addEventListener('DOMContentLoaded', (event) => {
   CFDScriptVersion() // Print CFDScript version
   chkSolidHeatboundaryConditions(boundaryConditions); // Check boundary conditions
-  let { solutionVector, nx, numNodesY, nodeXCoordinates, nodeYCoordinates } = CFDScript('solidHeatScript', compuMesh, boundaryConditions) // Assembly matrices and solve the system of equations
+  let { solutionVector, nx, numNodesY, nodeXCoordinates, nodeYCoordinates } = CFDScript('solidHeatScript', meshConfig, boundaryConditions) // Assembly matrices and solve the system of equations
   plotSolution2D(solutionVector, nx, numNodesY, nodeXCoordinates, nodeYCoordinates); // Visualise the solution
 });
 &lt;/script&gt;</pre>

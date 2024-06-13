@@ -85,9 +85,9 @@
       Promise.all([
           fetchJSON('./meshConfig.json'), // Computational mesh configuration file
           fetchJSON('./boundaryConditions.json') // Boundary conditions configuration file
-      ]).then(([compuMeshData, boundCondData]) => {
-          meshConfig = compuMeshData;
-          boundaryConditions = boundCondData;
+      ]).then(([meshConfigData, boundaryConditionsData]) => {
+          meshConfig = meshConfigData;
+          boundaryConditions = boundaryConditionsData;
       });
   </script>
 
