@@ -83,12 +83,12 @@
 &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js">&lt;/script&gt;</pre>
     <p>
       Following this, various problem parameters, such as the number of elements, domain boundaries, and boundary conditions, are defined using external <a href="https://www.w3schools.com/js/js_json_intro.asp" target="_blank">JSON</a> files. 
-      The first JSON file is the computational mesh configuration file (compuMesh.json):
+      The first JSON file is the computational mesh configuration file (meshConfig.json):
     </p>
     <pre class="prettyprint">
 {
-  "nex": 8,
-  "ney": 4,
+  "numElementsX": 8,
+  "numElementsY": 4,
   "maxX": 4,
   "maxY": 2
 }</pre>
