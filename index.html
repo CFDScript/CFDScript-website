@@ -149,8 +149,8 @@ import { chkSolidHeatboundaryConditions, CFDScriptVersion } from 'https://cfdscr
 window.addEventListener('DOMContentLoaded', (event) => {
   CFDScriptVersion() // Print CFDScript version
   chkSolidHeatboundaryConditions(boundaryConditions); // Check boundary conditions
-  let { solutionVector, nx, numNodesY, nodeXCoordinates, nodeYCoordinates } = CFDScript('solidHeatScript', meshConfig, boundaryConditions) // Assembly matrices and solve the system of equations
-  plotSolution2D(solutionVector, nx, numNodesY, nodeXCoordinates, nodeYCoordinates); // Visualise the solution
+  let { solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates } = CFDScript('solidHeatScript', meshConfig, boundaryConditions) // Assembly matrices and solve the system of equations
+  plotSolution2D(solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates); // Visualise the solution
 });
 &lt;/script&gt;</pre>
     <p>
