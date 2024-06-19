@@ -17,10 +17,12 @@
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="keywords" content="finite elements, fem, galerkin, cfd, computational mechanics, javascript">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     
     <style type="text/css">
-      body { margin: auto; padding: 25px; font-family: helvetica, sans-serif; font-size: 90%; }
+
+      html { max-width: 1500px; margin: auto; font-family: helvetica, sans-serif; font-size: 90%; }
+      body { padding: 25px; }
       h1, h2, h3, h4, h5, h6 { background: none; font-weight: normal; margin: 0; padding-top: 0.4em; padding-bottom: 0.2em; width: auto; }
       h1 { font-size: 150%; margin-bottom: 0.4em; line-height: 1.2em; }
       h1.top{ color: #555; border-bottom: 1px solid #aaa; }
@@ -32,11 +34,7 @@
       #menu li a { color: #333; font-weight: bold; text-decoration: none; }
       #menu li a:hover { color: #555; }
       img.title { height: 1em; }
-      pre { background-color: #f2f2f2; width: fit-content; margin: 0; padding: 10; overflow-x: auto; }
     </style>
-    
-    <!-- Import the run_prettify.js library for JavaScript code coloring -->
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script> <!-- depreciated library -->
   </head>
 
   <body>
@@ -48,16 +46,18 @@
       <img src="./images/example1.png" alt="">
     </div>
     
-    <h1>A JavaScript library for solving Partial Differential Equations (PDE) using the Finite Element Method (FEM)</h1>
+    <h1>A JavaScript library for solving Partial Differential Equations using the Finite Element Method</h1>
 
     <ul id="menu">
       <li><a href="#download">Download</a></li>
       <li><a href="#documentation">Documentation</a></li>
+      <li><a href="#development">Development</a></li>
+      <li><a href="#links">Links</a></li>
       <li><a href="#licensing">Licensing</a></li>
     </ul>
 
     <p>
-      CFDScript is a JavaScript library that is designed to solve Partial Differential Equations (PDE) using the Finite Element Method (FEM). 
+      CFDScript is an open-source JavaScript library for solving Partial Differential Equations using the Finite Element Method. 
       It enables the creation and running of browser-based simulations for physics and engineering problems. 
       Visualization tools are also provided by CFDScript to display the results of simulations.
     </p>
@@ -66,106 +66,39 @@
 
     <p>
       CFDScript is currently under development with continuous addition of new features and improvements. 
-      The latest version of CFDScript can be downloaded from the Git repository: <a href="https://github.com/CFDScript/CFDScript" target="_blank">https://github.com/CFDScript/CFDScript</a>.
+      The latest version of CFDScript can be downloaded from our <a href="https://github.com/CFDScript/CFDScript" target="_blank">GitHub repository</a>.
     </p>
 
     <h2 id="documentation"><a name="Documentation"></a>Documentation</h2>
+    <p>
+      Here we demonstrate example codes which would serve as a step-by-step introduction to CFDScript.
+    </p>
+    <ul>
+      <li><a href="https://www.cfdscript.com/exampleHeatTrasnfer.html" target="_blank">Heat transfer on a 2D solid</a>. 
+      The example demonstrates the use of CFDScript to define and solve a heat transfer problem on your web browser.
+    </ul>
+    <p>
+      Please report any issues and provide feedback on the above examples to the <a href="https://github.com/CFDScript/CFDScript/issues" target="_blank">GitHub issue tracker</a>.
+    </p>
 
-    <h3>Usage example (Heat transfer on a 2D solid)</h3>
+    <h2 id="development"><a name="Development"></a>Development</h2>
+    <p>
+      You can get involved with CFDScript by reporting issues on the <a href="https://github.com/CFDScript/CFDScript/issues" target="_blank">GitHub tracking system</a>.
+    </p>
 
+    <h2 id="links"><a name="Links"></a>Links</h2>
     <p>
-      A demonstration is provided below on how to utilize the CFDScript library for addressing a stationary heat transfer problem on a 2D rectangular domain. 
-      The following scripts should be included in the HTML page. 
-      The initial step involves the importation of the <a href="https://mathjs.org/" target="_blank">Math.js</a> and <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a> libraries, which are essential for solving the system of equations and visualizing the solution.
+      CFDScript depends to a certain extent on the following third-party open-source libraries:
     </p>
-    <pre class="prettyprint">
-&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js">&lt;/script&gt;
-&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js">&lt;/script&gt;</pre>
-    <p>
-      Following this, various problem parameters, such as the number of elements, domain boundaries, and boundary conditions, are defined using external <a href="https://www.w3schools.com/js/js_json_intro.asp" target="_blank">JSON</a> files. 
-      The first JSON file is the computational mesh configuration file (meshConfig.json):
-    </p>
-    <pre class="prettyprint">
-{
-  "numElementsX": 8,
-  "numElementsY": 4,
-  "maxX": 4,
-  "maxY": 2
-}</pre>
-    <p>
-      In this example, the parameters nex and ney represent the number of elements along the x-axis and y-axis, respectively. 
-      Additionally, maxX and maxY denote the final x-coordinate and y-coordinate of the mesh, respectively. 
-      The second essential JSON file is the boundary conditions configuration file (boundaryConditions.json).  
-      Boundary conditions can be specified as Dirichlet, Robin, or Neumann types.
-      The Dirichlet condition sets a constant temperature value, while the Robin condition describes a convective heat transfer scenario, allowing users to define a custom heat transfer coefficient and an external temperature. 
-      The Neumann boundary condition represents a zero-flux type.
-      The boundary conditions configuration file is structured as follows:
-    </p>
-    <pre class="prettyprint">
-{
-  "topBoundary": ["robin", "placeholder"],
-  "bottomBoundary": ["dirichlet", 200.0],
-  "leftBoundary": ["neumann", "placeholder"],
-  "rightBoundary": ["dirichlet", 200.0],
-  "robinHeatTranfCoeff": 1,
-  "robinExtTemp": 20
-}</pre>
-    <p>
-      In the provided example, the second argument for a Dirichlet boundary condition corresponds to the constant temperature value. 
-      For a Robin boundary condition, the parameter robinHeatTranfCoeff represents the heat transfer coefficient, and robinExtTemp indicates the external temperature.
-      These JSON files are fetched using the following script:
-    </p>
-    <pre class="prettyprint">
-&lt;script&gt;
-    let meshConfig, boundaryConditions;
-    // Function to fetch and parse JSON files
-    function fetchJSON(url) {
-      return fetch(url)
-        .then(response => response.json());
-    }
-    // Fetch all JSON files asynchronously
-    Promise.all([
-      fetchJSON('./meshConfig.json'), // Computational mesh configuration file
-      fetchJSON('./boundaryConditions.json') // Boundary conditions configuration file
-    ]).then(([meshConfigData, boundaryConditionsData]) => {
-      meshConfig = meshConfigData;
-      boundaryConditions = boundaryConditionsData;
-    });
-&lt;/script&gt;</pre>
-    <p>
-      Subsequently, the solidHeatScript solver, a module of the CFDScript library, is utilized. 
-      This solver implements the Finite Element Method for heat conduction problems. 
-      The solver accepts the number of elements, domain dimensions, and boundary conditions as inputs and returns the grid points (nodeXCoordinates, nodeYCoordinates) and the solution vector (solutionVector) as outputs. 
-      Finally, the solution is visualized in the form of a contour plot.
-      The following script demonstrates these steps:
-    </p>
-    <pre class="prettyprint">
-&lt;script type="module"&gt;
-// Import the CFDscript library
-import { CFDScript } from 'https://cfdscript.github.io/CFDScript/src/CFDScript.js';
-import { plotSolution2D } from 'https://cfdscript.github.io/CFDScript/src/plotSolScript.js';
-import { chkSolidHeatboundaryConditions, CFDScriptVersion } from 'https://cfdscript.github.io/CFDScript/src/auxFunScript.js';
+    <ul>
+      <li>CFDScript uses the LU decomposition solver of <a href="https://mathjs.org/" target="_blank">Math.js</a>
+      <li>CFDScript's vector output is produced by <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a>
+    </ul>
 
-window.addEventListener('DOMContentLoaded', (event) => {
-  CFDScriptVersion() // Print CFDScript version
-  chkSolidHeatboundaryConditions(boundaryConditions); // Check boundary conditions
-  let { solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates } = CFDScript('solidHeatScript', meshConfig, boundaryConditions) // Assembly matrices and solve the system of equations
-  plotSolution2D(solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates); // Visualise the solution
-});
-&lt;/script&gt;</pre>
-    <p>
-      To display the plotted results, an HTML container element is also required on the page.
-    </p>
-    <pre class="prettyprint">
-&lt;div id="plot">&lt;/div&gt</pre>
-    
-    <p>
-      For a comprehensive understanding of the heat transfer problem and a demonstration of the provided code, please visit the <a href="https://www.cfdscript.com/exampleHeatTrasnfer.html" target="_blank">example page</a>. 
-      All issues and feedback should be directed to the following GitHub repository: <a href="https://github.com/CFDScript/CFDScript/issues" target="_blank">https://github.com/CFDScript/CFDScript/issues</a>.
-    </p>
     <h2 id="licensing"><a name="Licensing"></a>Licensing</h2>
     <p>
-      CFDScript is distributed under the terms of the <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU General Public License version 3</a>. Copyright <span id="currentYear"></span> CFDScript.
+      CFDScript is distributed under the terms of the <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU General Public License version 3</a>. 
+      Copyright <span id="currentYear"></span> CFDScript.
     </p>
   
     <script>
