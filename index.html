@@ -34,6 +34,21 @@
       #menu li a { color: #333; font-weight: bold; text-decoration: none; }
       #menu li a:hover { color: #555; }
       img.title { height: 1em; }
+      @media screen and (max-width: 500px) 
+      {
+        body { padding: 10px; }
+        h1 { font-size: 145%; }
+        h2 { font-size: 140%; }
+        ul { padding-left: 1.5em; }
+        #banner { width: 90px; padding-left: 1em; padding-bottom: 1em; }
+        #banner img { width: 90px; margin-bottom: 1ex; }
+      }
+      @media screen and (min-width: 1000px) 
+      {
+        #banner { width: 250px; }
+        #banner img { width: 250px; margin-bottom: 2.5ex; }
+      }
+
     </style>
   </head>
 
