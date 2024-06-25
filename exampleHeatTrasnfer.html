@@ -13,11 +13,14 @@
 <html>
   <head>
     <title>CFDScript: Heat transfer on a 2D solid example</title>
-    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="keywords" content="finite elements, fem, galerkin, cfd, computational mechanics, javascript">
-    <meta name="viewport" content="width=device-width">
-    <link href="CFDScript-website.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="keywords"
+      content="finite elements, fem, galerkin, cfd, computational mechanics, javascript"
+    />
+    <meta name="viewport" content="width=device-width" />
+    <link href="CFDScript-website.css" rel="stylesheet" type="text/css" />
     <!-- Browser UMD build that exposes the libraries as global variables -->
     <!-- Import the Math.js library for mathematical operations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js"></script>
@@ -25,41 +28,63 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
     <!-- Import the MathJax for writing equations -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
     <!-- Import the run_prettify.js library for JavaScript code coloring -->
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script> <!-- depreciated library -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <!-- depreciated library -->
   </head>
 
   <body>
-
-    <h1 class="top">CFDScript&nbsp;<img class="title"
-      src="./images/favicon.ico" alt="">
+    <h1 class="top">
+      CFDScript&nbsp;<img class="title" src="./images/favicon.ico" alt="" />
     </h1>
 
     <h3>Heat transfer on a 2D solid example</h3>
 
     <p>
-      In the following example, we address a stationary heat transfer problem within a 2D rectangular domain. 
-      The steady heat conduction is described by the Laplace equation: \(\nabla^{2}T(x,y) = 0\), where \(T\) signifies the temperature values. 
-      The following schematic illustrates the problem domain and outlines the associated boundary conditions.
-      The constant temperature boundary conditions are implemented as Dirichlet types in the finite element code. 
-      The symmetry boundary condition is implemented as a Neumann zero-flux type (\( \frac{dT}{dx}=0\) ), while the convective cooling boundary condition is of the Robin type.
-      Specifically, the latter is expressed as \( \frac{dT}{dy}=-h(T-T_0)\), where \(h\) is the heat transfer coefficient (\(h\) = 1 m<sup>-1</sup>) and \(T_0\) is the external temperature (\(T_0\) = 20 &deg;C).
+      In the following example, we address a stationary heat transfer problem
+      within a 2D rectangular domain. The steady heat conduction is described by
+      the Laplace equation: \(\nabla^{2}T(x,y) = 0\), where \(T\) signifies the
+      temperature values. The following schematic illustrates the problem domain
+      and outlines the associated boundary conditions. The constant temperature
+      boundary conditions are implemented as Dirichlet types in the finite
+      element code. The symmetry boundary condition is implemented as a Neumann
+      zero-flux type (\( \frac{dT}{dx}=0\) ), while the convective cooling
+      boundary condition is of the Robin type. Specifically, the latter is
+      expressed as \( \frac{dT}{dy}=-h(T-T_0)\), where \(h\) is the heat
+      transfer coefficient (\(h\) = 1 m<sup>-1</sup>) and \(T_0\) is the
+      external temperature (\(T_0\) = 20 &deg;C).
     </p>
 
-    <img src="./images/exampleHeatTrasnfer.png" width="300">
+    <img src="./images/exampleHeatTrasnfer.png" width="300" />
 
     <p>
-      A demonstration is provided below on how to utilize the CFDScript library for addressing the above stationary heat transfer problem on a 2D rectangular domain. 
-      The following scripts should be included in the HTML page. 
-      The initial step involves the importation of the <a href="https://mathjs.org/" target="_blank">Math.js</a> and <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a> libraries, which are essential for solving the system of equations and visualizing the solution.
+      A demonstration is provided below on how to utilize the CFDScript library
+      for addressing the above stationary heat transfer problem on a 2D
+      rectangular domain. The following scripts should be included in the HTML
+      page. The initial step involves the importation of the
+      <a href="https://mathjs.org/" target="_blank">Math.js</a> and
+      <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a>
+      libraries, which are essential for solving the system of equations and
+      visualizing the solution.
     </p>
     <pre class="prettyprint">
 &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js">&lt;/script&gt;
-&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js">&lt;/script&gt;</pre>
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js">&lt;/script&gt;</pre
+    >
     <p>
-      Following this, various problem parameters, such as the number of elements, domain boundaries, and boundary conditions, are defined using external <a href="https://www.w3schools.com/js/js_json_intro.asp" target="_blank">JSON</a> files. 
-      The first JSON file is the computational mesh configuration file (meshConfig.json):
+      Following this, various problem parameters, such as the number of
+      elements, domain boundaries, and boundary conditions, are defined using
+      external
+      <a href="https://www.w3schools.com/js/js_json_intro.asp" target="_blank"
+        >JSON</a
+      >
+      files. The first JSON file is the computational mesh configuration file
+      (meshConfig.json):
     </p>
     <pre class="prettyprint">
 {
@@ -67,15 +92,20 @@
   "numElementsY": 4,
   "maxX": 4,
   "maxY": 2
-}</pre>
+}</pre
+    >
     <p>
-      In this example, the parameters nex and ney represent the number of elements along the x-axis and y-axis, respectively. 
-      Additionally, maxX and maxY denote the final x-coordinate and y-coordinate of the mesh, respectively. 
-      The second essential JSON file is the boundary conditions configuration file (boundaryConditions.json).  
-      Boundary conditions can be specified as Dirichlet, Robin, or Neumann types.
-      The Dirichlet condition sets a constant temperature value, while the Robin condition describes a convective heat transfer scenario, allowing users to define a custom heat transfer coefficient and an external temperature. 
-      The Neumann boundary condition represents a zero-flux type.
-      The boundary conditions configuration file is structured as follows:
+      In this example, the parameters nex and ney represent the number of
+      elements along the x-axis and y-axis, respectively. Additionally, maxX and
+      maxY denote the final x-coordinate and y-coordinate of the mesh,
+      respectively. The second essential JSON file is the boundary conditions
+      configuration file (boundaryConditions.json). Boundary conditions can be
+      specified as Dirichlet, Robin, or Neumann types. The Dirichlet condition
+      sets a constant temperature value, while the Robin condition describes a
+      convective heat transfer scenario, allowing users to define a custom heat
+      transfer coefficient and an external temperature. The Neumann boundary
+      condition represents a zero-flux type. The boundary conditions
+      configuration file is structured as follows:
     </p>
     <pre class="prettyprint">
 {
@@ -85,10 +115,13 @@
   "rightBoundary": ["dirichlet", 200.0],
   "robinHeatTranfCoeff": 1,
   "robinExtTemp": 20
-}</pre>
+}</pre
+    >
     <p>
-      In the provided example, the second argument for a Dirichlet boundary condition corresponds to the constant temperature value. 
-      For a Robin boundary condition, the parameter robinHeatTranfCoeff represents the heat transfer coefficient, and robinExtTemp indicates the external temperature.
+      In the provided example, the second argument for a Dirichlet boundary
+      condition corresponds to the constant temperature value. For a Robin
+      boundary condition, the parameter robinHeatTranfCoeff represents the heat
+      transfer coefficient, and robinExtTemp indicates the external temperature.
       These JSON files are fetched using the following script:
     </p>
     <pre class="prettyprint">
@@ -107,13 +140,16 @@
       meshConfig = meshConfigData;
       boundaryConditions = boundaryConditionsData;
     });
-&lt;/script&gt;</pre>
+&lt;/script&gt;</pre
+    >
     <p>
-      Subsequently, the solidHeatScript solver, a module of the CFDScript library, is utilized. 
-      This solver implements the Finite Element Method for heat conduction problems. 
-      The solver accepts the number of elements, domain dimensions, and boundary conditions as inputs and returns the grid points (nodeXCoordinates, nodeYCoordinates) and the solution vector (solutionVector) as outputs. 
-      Finally, the solution is visualized in the form of a contour plot.
-      The following script demonstrates these steps:
+      Subsequently, the solidHeatScript solver, a module of the CFDScript
+      library, is utilized. This solver implements the Finite Element Method for
+      heat conduction problems. The solver accepts the number of elements,
+      domain dimensions, and boundary conditions as inputs and returns the grid
+      points (nodeXCoordinates, nodeYCoordinates) and the solution vector
+      (solutionVector) as outputs. Finally, the solution is visualized in the
+      form of a contour plot. The following script demonstrates these steps:
     </p>
     <pre class="prettyprint">
 &lt;script type="module"&gt;
@@ -128,19 +164,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
   let { solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates } = CFDScript('solidHeatScript', meshConfig, boundaryConditions) // Assembly matrices and solve the system of equations
   plotSolution2D(solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates); // Visualise the solution
 });
-&lt;/script&gt;</pre>
+&lt;/script&gt;</pre
+    >
     <p>
-      To display the plotted results, an HTML container element is also required on the page.
+      To display the plotted results, an HTML container element is also required
+      on the page.
     </p>
-    <pre class="prettyprint">
-&lt;div id="plot">&lt;/div&gt</pre>
+    <pre class="prettyprint">&lt;div id="plot">&lt;/div&gt</pre>
 
     <p>
-      In the following plot we visualize the solution of the heat transfer problem. 
-      In our analysis we have used 24 (8 in the x- and 4 in the y-direction) two-dimensional quadratic elements.
+      In the following plot we visualize the solution of the heat transfer
+      problem. In our analysis we have used 24 (8 in the x- and 4 in the
+      y-direction) two-dimensional quadratic elements.
     </p>
 
-    <div id="plot"></div> <!-- Container element where the solution plot will be rendered -->
+    <div id="plot"></div>
+    <!-- Container element where the solution plot will be rendered -->
 
     <ul id="menu">
       <li><a href="https://www.cfdscript.com/index.html">Return to home</a></li>
@@ -151,40 +190,52 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
       // Function to fetch and parse JSON files
       function fetchJSON(url) {
-          return fetch(url)
-              .then(response => response.json());
+        return fetch(url).then((response) => response.json());
       }
 
       // Fetch all JSON files asynchronously
       Promise.all([
-          fetchJSON('./meshConfig.json'), // Computational mesh configuration file
-          fetchJSON('./boundaryConditions.json') // Boundary conditions configuration file
+        fetchJSON("./meshConfig.json"), // Computational mesh configuration file
+        fetchJSON("./boundaryConditions.json"), // Boundary conditions configuration file
       ]).then(([meshConfigData, boundaryConditionsData]) => {
-          meshConfig = meshConfigData;
-          boundaryConditions = boundaryConditionsData;
+        meshConfig = meshConfigData;
+        boundaryConditions = boundaryConditionsData;
       });
-  </script>
+    </script>
 
     <script type="module">
       // Import the CFDscript library (for running JavaScript in local HTML files see here: https://stackoverflow.com/questions/58067499/runing-javascript-in-local-html-files-in-firefox)
-      import { CFDScript } from 'https://cfdscript.github.io/CFDScript/src/CFDScript.js';
-      import { plotSolution2D } from 'https://cfdscript.github.io/CFDScript/src/plotSolScript.js';
-      import { chkSolidHeatboundaryConditions, CFDScriptVersion } from 'https://cfdscript.github.io/CFDScript/src/auxFunScript.js';
-      
+      import { CFDScript } from "https://cfdscript.github.io/CFDScript/src/CFDScript.js";
+      import { plotSolution2D } from "https://cfdscript.github.io/CFDScript/src/plotSolScript.js";
+      import {
+        chkSolidHeatboundaryConditions,
+        CFDScriptVersion,
+      } from "https://cfdscript.github.io/CFDScript/src/auxFunScript.js";
+
       // Import the CFDscript library from a local server
       //import { CFDScript } from '../CFDScript/src/CFDScript.js';
       //import { plotSolution2D } from '../CFDScript/src/plotSolScript.js';
       //import { chkSolidHeatboundaryConditions, CFDScriptVersion } from '../CFDScript/src/auxFunScript.js';
 
       // The functions will be executed as soon as the page finishes loading
-      window.addEventListener('DOMContentLoaded', (event) => {
-        CFDScriptVersion() // Print CFDScript version
-        //chkSolidHeatboundaryConditions(boundaryConditions); // Check boundary conditions   
-        let { solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates } = CFDScript('solidHeatScript', meshConfig, boundaryConditions); // Assembly matrices and solve the system of equations
-        plotSolution2D(solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates); // Visualise the solution
-      })
+      window.addEventListener("DOMContentLoaded", (event) => {
+        CFDScriptVersion(); // Print CFDScript version
+        //chkSolidHeatboundaryConditions(boundaryConditions); // Check boundary conditions
+        let {
+          solutionVector,
+          numNodesX,
+          numNodesY,
+          nodeXCoordinates,
+          nodeYCoordinates,
+        } = CFDScript("solidHeatScript", meshConfig, boundaryConditions); // Assembly matrices and solve the system of equations
+        plotSolution2D(
+          solutionVector,
+          numNodesX,
+          numNodesY,
+          nodeXCoordinates,
+          nodeYCoordinates
+        ); // Visualise the solution
+      });
     </script>
-
   </body>
-
 </html>
