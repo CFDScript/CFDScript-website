@@ -21,7 +21,7 @@
     />
     <meta name="viewport" content="width=device-width" />
     <link href="CFDScript-website.css" rel="stylesheet" type="text/css" />
-    <!-- Browser UMD build that exposes the libraries as global variables -->
+    <!-- In the following we use browser UMD build that exposes the libraries as global variables -->
     <!-- Import the Math.js library for mathematical operations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js"></script>
     <!-- Import the Plotly.js library for plotting -->
@@ -33,9 +33,8 @@
       async
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     ></script>
-    <!-- Import the run_prettify.js library for JavaScript code coloring -->
+    <!-- Import the run_prettify.js library for JavaScript code coloring *** Depreciated library *** -->
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-    <!-- depreciated library -->
   </head>
 
   <body>
@@ -204,18 +203,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
     </script>
 
     <script type="module">
-      // Import the CFDscript library (for running JavaScript in local HTML files see here: https://stackoverflow.com/questions/58067499/runing-javascript-in-local-html-files-in-firefox)
+      // Import the CFDscript library from GitHub server
       import { CFDScript } from "https://cfdscript.github.io/CFDScript/src/CFDScript.js";
-      import { plotSolution2D } from "https://cfdscript.github.io/CFDScript/src/plotSolScript.js";
+      import { plotSolution2D, plotMesh2D} from "https://cfdscript.github.io/CFDScript/src/plotSolScript.js";
       import {
         chkSolidHeatboundaryConditions,
         CFDScriptVersion,
       } from "https://cfdscript.github.io/CFDScript/src/auxFunScript.js";
 
-      // Import the CFDscript library from a local server
-      //import { CFDScript } from '../CFDScript/src/CFDScript.js';
-      //import { plotSolution2D } from '../CFDScript/src/plotSolScript.js';
-      //import { chkSolidHeatboundaryConditions, CFDScriptVersion } from '../CFDScript/src/auxFunScript.js';
+      // Import the CFDscript library from a local server *** Don't forget to change it before commit ***
+      // To start a server in Python: python3 -m http.server 8000
+      // For running JavaScript in local HTML files: https://stackoverflow.com/questions/58067499/runing-javascript-in-local-html-files-in-firefox
+      //import { CFDScript } from "../CFDScript/src/CFDScript.js";
+      //import { plotSolution2D, plotMesh2D} from "../CFDScript/src/plotSolScript.js";
+      //import {
+      //  chkSolidHeatboundaryConditions,
+      //  CFDScriptVersion,
+      //} from "../CFDScript/src/auxFunScript.js";
 
       // The functions will be executed as soon as the page finishes loading
       window.addEventListener("DOMContentLoaded", (event) => {
@@ -229,12 +233,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
           nodeYCoordinates,
         } = CFDScript("solidHeatScript", meshConfig, boundaryConditions); // Assembly matrices and solve the system of equations
         plotSolution2D(
+          // Visualise the solution
           solutionVector,
           numNodesX,
           numNodesY,
           nodeXCoordinates,
           nodeYCoordinates
-        ); // Visualise the solution
+        );
       });
     </script>
   </body>
