@@ -27,7 +27,13 @@
 
   <body>
     <h1 class="top">
-      CFDScript&nbsp;<img class="title" src="./images/favicon.ico" alt="" />
+      <img
+        src="./images/logo.png"
+        alt="CFDScript Logo"
+        id="responsive-logo"
+        style="vertical-align: middle"
+      />
+      <!-- CFDScript&nbsp;<img class="title" src="./images/favicon.ico" alt="" /> -->
     </h1>
 
     <div id="banner">
@@ -40,10 +46,9 @@
     </h1>
 
     <ul id="menu">
-      <li><a href="#download">Download</a></li>
+      <li><a href="#getstarted">Get Started</a></li>
       <li><a href="#documentation">Documentation</a></li>
-      <li><a href="#development">Development</a></li>
-      <li><a href="#links">Links</a></li>
+      <li><a href="#features">Features</a></li>
       <li><a href="#licensing">Licensing</a></li>
     </ul>
 
@@ -56,8 +61,18 @@
       heavy software or any other prerequisites.
     </p>
 
-    <h2 id="download"><a name="Download"></a>Download</h2>
+    <h2 id="features"><a name="Features"></a>Features</h2>
+    <ul>
+      <li>
+        Browser-based simulations without the need for additional installations
+      </li>
+      <li>Heat transfer solver for 2D domains. More solvers are on the way</li>
+      <li>Integration with <a href="https://mathjs.org/" target="_blank">Math.js</a> for advanced mathematical computations</li>
+      <li>Visualization capabilities using <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a></li>
+      <li>Continuous updates and community-driven development</li>
+    </ul>
 
+    <h2 id="getstarted"><a name="Get Started"></a>Get Started</h2>
     <p>
       CFDScript is currently under development with continuous addition of new
       features and improvements. The latest version of CFDScript can be
@@ -66,8 +81,24 @@
         >GitHub repository</a
       >.
     </p>
+    <p>
+      Whether you are a CFD or JavaScript enthusiast, we are currently on the
+      lookout for developers to contribute to the project! A great way to start
+      getting involved is by reporting issues on the
+      <a href="https://github.com/CFDScript/CFDScript/issues" target="_blank"
+        >GitHub tracking system</a
+      >. To get an idea of our short- and long-term goals, please see the
+      project roadmap
+      <a
+        href="https://github.com/CFDScript/CFDScript/wiki/Roadmap"
+        target="_blank"
+        >here</a
+      >.
+    </p>
 
-    <h2 id="documentation"><a name="Documentation"></a>Documentation</h2>
+    <h2 id="documentation">
+      <a name="Documentation"></a>Documentation
+    </h2>
     <p>
       Here we demonstrate example codes which would serve as a step-by-step
       introduction to CFDScript.
@@ -83,7 +114,6 @@
         heat transfer problem on your web browser.
       </li>
       <!-- Run examples on a local server *** Don't forget to change it before commit *** -->
-      <!-- To start a server in Python: python3 -m http.server 8000 -->
       <!--<li>
         <a href="./exampleHeatTrasnfer.html" target="_blank"
           >Heat transfer on a 2D solid</a
@@ -91,39 +121,12 @@
         heat transfer problem on your web browser.
       </li>-->
     </ul>
-
     <p>
       Please report any feedback on the above examples to the
       <a href="https://github.com/orgs/CFDScript/discussions" target="_blank"
         >GitHub discussions</a
       >.
     </p>
-
-    <h2 id="development"><a name="Development"></a>Development</h2>
-    <p>
-      Whether you are a CFD or JavaScript enthusiast, we are currently on the
-      lookout for developers to contribute to the project! A great way to start
-      getting involved is by reporting issues on the
-      <a href="https://github.com/CFDScript/CFDScript/issues" target="_blank"
-        >GitHub tracking system</a
-      >.
-    </p>
-
-    <h2 id="links"><a name="Links"></a>Links</h2>
-    <p>
-      CFDScript depends to a certain extent on the following third-party
-      open-source libraries:
-    </p>
-    <ul>
-      <li>
-        CFDScript uses the LU decomposition solver of
-        <a href="https://mathjs.org/" target="_blank">Math.js</a>
-      </li>
-      <li>
-        CFDScript's vector output is produced by
-        <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a>
-      </li>
-    </ul>
 
     <h2 id="licensing"><a name="Licensing"></a>Licensing</h2>
     <p>
