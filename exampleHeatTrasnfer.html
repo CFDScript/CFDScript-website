@@ -35,6 +35,7 @@
     ></script>
     <!-- Import the run_prettify.js library for JavaScript code coloring *** Depreciated library *** -->
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" /> -->
   </head>
 
   <body>
@@ -69,17 +70,19 @@
 
     <p>
       A demonstration is provided below on how to utilize the CFDScript library
-      for addressing the above stationary heat transfer problem on a 2D
-      rectangular domain. The following scripts should be included in the HTML
-      page. The initial step involves the importation of the
+      for addressing the above stationary heat transfer problem in your
+      responsive web project. Initially the following libraries should be
+      included in the head element using CDN:
       <a href="https://mathjs.org/" target="_blank">Math.js</a> and
-      <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a>
-      libraries, which are essential for solving the system of equations and
-      visualizing the solution.
+      <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a>.
     </p>
     <pre class="prettyprint">
-&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js">&lt;/script&gt;
-&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js">&lt;/script&gt;</pre
+&lt;head&gt;
+    . . .
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js">&lt;/script&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js">&lt;/script&gt;
+    . . .
+&lt;/head&gt;</pre
     >
     <p>
       Following this, various problem parameters, such as the number of
@@ -88,8 +91,8 @@
       <a href="https://www.w3schools.com/js/js_json_intro.asp" target="_blank"
         >JSON</a
       >
-      files. The first JSON file is the computational mesh configuration file
-      (meshConfig.json):
+      files. The first JSON file, meshConfig.json, is the computational mesh
+      configuration file:
     </p>
     <pre class="prettyprint">
 {
@@ -103,8 +106,8 @@
       In this example, the parameters nex and ney represent the number of
       elements along the x-axis and y-axis, respectively. Additionally, maxX and
       maxY denote the final x-coordinate and y-coordinate of the mesh,
-      respectively. The second essential JSON file is the boundary conditions
-      configuration file (boundaryConditions.json). Boundary conditions can be
+      respectively. The second essential JSON file, boundaryConditions.json, is
+      the boundary conditions configuration file. Boundary conditions can be
       specified as Dirichlet, Robin, or Neumann types. The Dirichlet condition
       sets a constant temperature value, while the Robin condition describes a
       convective heat transfer scenario, allowing users to define a custom heat
@@ -127,25 +130,30 @@
       condition corresponds to the constant temperature value. For a Robin
       boundary condition, the parameter robinHeatTranfCoeff represents the heat
       transfer coefficient, and robinExtTemp indicates the external temperature.
-      These JSON files are fetched using the following script:
+      The above JSON files are fetched using the following script:
     </p>
     <pre class="prettyprint">
-&lt;script&gt;
-    let meshConfig, boundaryConditions;
-    // Function to fetch and parse JSON files
-    function fetchJSON(url) {
-      return fetch(url)
-        .then(response => response.json());
-    }
-    // Fetch all JSON files asynchronously
-    Promise.all([
-      fetchJSON('./meshConfig.json'), // Computational mesh configuration file
-      fetchJSON('./boundaryConditions.json') // Boundary conditions configuration file
-    ]).then(([meshConfigData, boundaryConditionsData]) => {
-      meshConfig = meshConfigData;
-      boundaryConditions = boundaryConditionsData;
-    });
-&lt;/script&gt;</pre
+&lt;body&gt;
+    . . .
+    &lt;script
+        let meshConfig, boundaryConditions;
+        // Function to fetch and parse JSON files
+        function fetchJSON(url) {
+          return fetch(url)
+            .then(response => response.json());
+        }
+        // Fetch all JSON files asynchronously
+        Promise.all([
+          fetchJSON('./meshConfig.json'), // Computational mesh configuration file
+          fetchJSON('./boundaryConditions.json') // Boundary conditions configuration file
+        ]).then(([meshConfigData, boundaryConditionsData]) => {
+          meshConfig = meshConfigData;
+          boundaryConditions = boundaryConditionsData;
+        });  
+    &lt;/script&gt;
+    . . .
+&lt;/body&gt;
+</pre
     >
     <p>
       Subsequently, the solidHeatScript solver, a module of the CFDScript
@@ -153,35 +161,46 @@
       heat conduction problems. The solver accepts the number of elements,
       domain dimensions, and boundary conditions as inputs and returns the grid
       points (nodeXCoordinates, nodeYCoordinates) and the solution vector
-      (solutionVector) as outputs. Finally, the solution is visualized in the
-      form of a contour plot. The following script demonstrates these steps:
+      (solutionVector) as outputs. The following script demonstrates these
+      steps:
     </p>
     <pre class="prettyprint">
-&lt;script type="module"&gt;
-// Import the CFDscript library
-import { CFDScript } from 'https://cfdscript.github.io/CFDScript/src/CFDScript.js';
-import { plotSolution2D } from 'https://cfdscript.github.io/CFDScript/src/plotSolScript.js';
-import { chkSolidHeatboundaryConditions, CFDScriptVersion } from 'https://cfdscript.github.io/CFDScript/src/auxFunScript.js';
-
-window.addEventListener('DOMContentLoaded', (event) => {
-  CFDScriptVersion() // Print CFDScript version
-  chkSolidHeatboundaryConditions(boundaryConditions); // Check boundary conditions
-  let { solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates } = CFDScript('solidHeatScript', meshConfig, boundaryConditions) // Assembly matrices and solve the system of equations
-  plotSolution2D(solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates); // Visualise the solution
-});
-&lt;/script&gt;</pre
+&lt;body&gt;
+    . . .
+    &lt;script type="module"&gt;
+        // Import the CFDscript library
+        import { CFDScript } from 'https://cfdscript.github.io/CFDScript/src/CFDScript.js';
+        import { plotSolution2D } from 'https://cfdscript.github.io/CFDScript/src/plotSolScript.js';
+        import { chkSolidHeatboundaryConditions, CFDScriptVersion } from 'https://cfdscript.github.io/CFDScript/src/auxFunScript.js';
+        window.addEventListener('DOMContentLoaded', (event) => {
+            CFDScriptVersion() // Print CFDScript version
+            chkSolidHeatboundaryConditions(boundaryConditions); // Check boundary conditions
+            let { solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates } = CFDScript('solidHeatScript', meshConfig, boundaryConditions) // Assembly matrices and solve the system of equations
+            plotSolution2D(solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates); // Visualise the solution
+        });
+    &lt;/script&gt;
+    . . .
+&lt;/body&gt;
+</pre
     >
     <p>
       To display the plotted results, an HTML container element is also required
       on the page.
     </p>
-    <pre class="prettyprint">&lt;div id="plot">&lt;/div&gt</pre>
+    <pre class="prettyprint">
+&lt;body&gt;
+    . . .
+    &lt;div id="plot">&lt;/div&gt
+    . . .
+&lt;/body&gt;</pre
+    >
 
     <p>
-      In the following plot, we visualize the solution to the heat transfer
-      problem. The solution is calculated in real-time directly in your browser.
-      Regarding the mesh details, 24 two-dimensional quadratic elements were
-      used, arranged as 8 in the x-direction and 4 in the y-direction.
+      Finally, the solution is calculated in real-time directly in your browser
+      and the results are visualized in the contour plot. Below you can see the
+      results of the heat transfer problem for a mesh of 24 two-dimensional
+      quadratic elements, arranged as 8 in the x-direction and 4 in the
+      y-direction.
     </p>
 
     <div id="plot"></div>
