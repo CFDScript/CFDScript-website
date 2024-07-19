@@ -139,17 +139,16 @@
         let meshConfig, boundaryConditions;
         // Function to fetch and parse JSON files
         function fetchJSON(url) {
-          return fetch(url)
-            .then(response => response.json());
+          return fetch(url).then((response) => response.json());
         }
         // Fetch all JSON files asynchronously
         Promise.all([
-          fetchJSON('./meshConfig.json'), // Computational mesh configuration file
-          fetchJSON('./boundaryConditions.json') // Boundary conditions configuration file
+          fetchJSON("./meshConfig.json"), // Computational mesh configuration file
+          fetchJSON("./boundaryConditions.json"), // Boundary conditions configuration file
         ]).then(([meshConfigData, boundaryConditionsData]) => {
           meshConfig = meshConfigData;
           boundaryConditions = boundaryConditionsData;
-        });  
+        });
     &lt;/script&gt;
     . . .
 &lt;/body&gt;
@@ -169,14 +168,28 @@
     . . .
     &lt;script type="module"&gt;
         // Import the CFDscript library
-        import { CFDScript } from 'https://cfdscript.github.io/CFDScript/src/CFDScript.js';
-        import { plotSolution2D } from 'https://cfdscript.github.io/CFDScript/src/plotSolScript.js';
-        import { chkSolidHeatboundaryConditions, CFDScriptVersion } from 'https://cfdscript.github.io/CFDScript/src/auxFunScript.js';
-        window.addEventListener('DOMContentLoaded', (event) => {
-            CFDScriptVersion() // Print CFDScript version
-            chkSolidHeatboundaryConditions(boundaryConditions); // Check boundary conditions
-            let { solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates } = CFDScript('solidHeatScript', meshConfig, boundaryConditions) // Assembly matrices and solve the system of equations
-            plotSolution2D(solutionVector, numNodesX, numNodesY, nodeXCoordinates, nodeYCoordinates); // Visualise the solution
+        import { CFDScript } from 'https://cfdscript.github.io/CFDScript/src/index.js';
+        import { plotSolution2D } from 'https://cfdscript.github.io/CFDScript/src/index.js';
+        import { chkSolidHeatboundaryConditions } from 'https://cfdscript.github.io/CFDScript/src/index.js';
+        import { CFDScriptVersion } from 'https://cfdscript.github.io/CFDScript/src/index.js';
+        window.addEventListener("DOMContentLoaded", (event) => {
+          CFDScriptVersion(); // Print CFDScript version
+          //chkSolidHeatboundaryConditions(boundaryConditions); // Check boundary conditions
+          let {
+            solutionVector,
+            numNodesX,
+            numNodesY,
+            nodeXCoordinates,
+            nodeYCoordinates,
+          } = CFDScript("solidHeatScript", meshConfig, boundaryConditions); // Assembly matrices and solve the system of equations
+          plotSolution2D(
+            // Visualise the solution
+            solutionVector,
+            numNodesX,
+            numNodesY,
+            nodeXCoordinates,
+            nodeYCoordinates
+          );
         });
     &lt;/script&gt;
     . . .
@@ -230,22 +243,51 @@
 
     <script type="module">
       // Import the CFDscript library from GitHub server
-      import { CFDScript } from "https://cfdscript.github.io/CFDScript/src/CFDScript.js";
-      import { plotSolution2D } from "https://cfdscript.github.io/CFDScript/src/plotSolScript.js";
-      import {
-        chkSolidHeatboundaryConditions,
-        CFDScriptVersion,
-      } from "https://cfdscript.github.io/CFDScript/src/auxFunScript.js";
+      import { CFDScript } from "https://cfdscript.github.io/CFDScript/src/index.js";
+      import { plotSolution2D } from "https://cfdscript.github.io/CFDScript/src/index.js";
+      import { chkSolidHeatboundaryConditions } from "https://cfdscript.github.io/CFDScript/src/index.js";
+      import { CFDScriptVersion } from "https://cfdscript.github.io/CFDScript/src/index.js";
 
       // Import the CFDscript library from a local server *** Don't forget to change it before commit ***
-      // To start a server in Python: python3 -m http.server 8000
+      // To start a server in Python: python3 -m http.server 8000 [the address is http://0.0.0.0:8000/]
+      // To add CORS support you should run the script cors_http_server.py (python3 cors_http_server.py)
+      //
+      // *** cors_http_server.py ***
+      // import http.server
+      // import socketserver
+      //
+      // PORT = 8000
+      // DIRECTORY = "."
+      //
+      // class CORSRequestHandler(http.server.SimpleHTTPRequestHandler):
+      //     def end_headers(self):
+      //         self.send_header('Access-Control-Allow-Origin', '*')
+      //         self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+      //         self.send_header('Access-Control-Allow-Headers', 'x-api-key, Content-Type')
+      //         return super(CORSRequestHandler, self).end_headers()
+      //
+      //     def do_OPTIONS(self):
+      //         self.send_response(200, "ok")
+      //         self.send_header('Access-Control-Allow-Origin', '*')
+      //         self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+      //         self.send_header('Access-Control-Allow-Headers', 'x-api-key, Content-Type')
+      //         self.end_headers()
+      //
+      // handler = CORSRequestHandler
+      // handler.extensions_map.update({
+      //     ".js": "application/javascript",
+      // })
+      //
+      // with socketserver.TCPServer(("", PORT), handler) as httpd:
+      //     print("Serving at port", PORT)
+      //     httpd.serve_forever()
+      // *** End of file ***
+      //
       // For running JavaScript in local HTML files: https://stackoverflow.com/questions/58067499/runing-javascript-in-local-html-files-in-firefox
-      //import { CFDScript } from "../CFDScript/src/CFDScript.js";
-      //import { plotSolution2D} from "../CFDScript/src/plotSolScript.js";
-      //import {
-      //  chkSolidHeatboundaryConditions,
-      //  CFDScriptVersion,
-      //} from "../CFDScript/src/auxFunScript.js";
+      //import { CFDScript } from "../CFDScript/src/index.js";
+      //import { plotSolution2D } from "../CFDScript/src/index.js";
+      //import { chkSolidHeatboundaryConditions } from "../CFDScript/src/index.js";
+      //import { CFDScriptVersion } from "../CFDScript/src/index.js";
 
       // The functions will be executed as soon as the page finishes loading
       window.addEventListener("DOMContentLoaded", (event) => {
