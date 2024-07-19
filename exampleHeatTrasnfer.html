@@ -249,45 +249,13 @@
       import { CFDScriptVersion } from "https://cfdscript.github.io/CFDScript/src/index.js";
 
       // Import the CFDscript library from a local server *** Don't forget to change it before commit ***
-      // To start a server in Python: python3 -m http.server 8000 [the address is http://0.0.0.0:8000/]
-      // To add CORS support you should run the script cors_http_server.py (python3 cors_http_server.py)
-      //
-      // *** cors_http_server.py ***
-      // import http.server
-      // import socketserver
-      //
-      // PORT = 8000
-      // DIRECTORY = "."
-      //
-      // class CORSRequestHandler(http.server.SimpleHTTPRequestHandler):
-      //     def end_headers(self):
-      //         self.send_header('Access-Control-Allow-Origin', '*')
-      //         self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-      //         self.send_header('Access-Control-Allow-Headers', 'x-api-key, Content-Type')
-      //         return super(CORSRequestHandler, self).end_headers()
-      //
-      //     def do_OPTIONS(self):
-      //         self.send_response(200, "ok")
-      //         self.send_header('Access-Control-Allow-Origin', '*')
-      //         self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-      //         self.send_header('Access-Control-Allow-Headers', 'x-api-key, Content-Type')
-      //         self.end_headers()
-      //
-      // handler = CORSRequestHandler
-      // handler.extensions_map.update({
-      //     ".js": "application/javascript",
-      // })
-      //
-      // with socketserver.TCPServer(("", PORT), handler) as httpd:
-      //     print("Serving at port", PORT)
-      //     httpd.serve_forever()
-      // *** End of file ***
-      //
-      // For running JavaScript in local HTML files: https://stackoverflow.com/questions/58067499/runing-javascript-in-local-html-files-in-firefox
       //import { CFDScript } from "../CFDScript/src/index.js";
       //import { plotSolution2D } from "../CFDScript/src/index.js";
       //import { chkSolidHeatboundaryConditions } from "../CFDScript/src/index.js";
       //import { CFDScriptVersion } from "../CFDScript/src/index.js";
+      // To start a server in Python (without CORS support) run 'python3 -m http.server 8000' (the address is http://0.0.0.0:8000/)
+      // To add CORS support you should run the script corsHttpServer.py ('python3 corsHttpServer')
+      // For running JavaScript in local HTML files see also https://stackoverflow.com/questions/58067499/runing-javascript-in-local-html-files-in-firefox
 
       // The functions will be executed as soon as the page finishes loading
       window.addEventListener("DOMContentLoaded", (event) => {
