@@ -174,7 +174,6 @@
         import { CFDScriptVersion } from 'https://cfdscript.github.io/CFDScript/src/index.js';
         window.addEventListener("DOMContentLoaded", (event) => {
           CFDScriptVersion(); // Print CFDScript version
-          //chkSolidHeatboundaryConditions(boundaryConditions); // Check boundary conditions
           let {
             solutionVector,
             numNodesX,
@@ -216,8 +215,8 @@
       y-direction.
     </p>
 
-    <div id="plot"></div>
     <!-- Container element where the solution plot will be rendered -->
+    <div id="plot"></div>
 
     <ul id="menu">
       <li><a href="https://www.cfdscript.com/index.html">Return to home</a></li>
@@ -242,7 +241,7 @@
     </script>
 
     <script type="module">
-      // Import the CFDscript library from GitHub server
+      // Import the CFDscript library from GitHub server *** You should comment the following lines when running CFDscript library from a local server***
       import { CFDScript } from "https://cfdscript.github.io/CFDScript/src/index.js";
       import { plotSolution2D } from "https://cfdscript.github.io/CFDScript/src/index.js";
       import { chkSolidHeatboundaryConditions } from "https://cfdscript.github.io/CFDScript/src/index.js";
