@@ -247,11 +247,8 @@
       // Extract the deflection field from the solution vector
       // DOF layout per node: [w, theta]
       const totalNodesX = model._eulerBernoulliBeamMetadata.totalNodesX;
-      const flatSolution = result.solutionVector.map((entry) => (Array.isArray(entry) ? entry[0] : entry));
-      const femDeflection = [];
-      for (let i = 0; i < totalNodesX; i++) {
-        femDeflection.push(flatSolution[2 * i]);
-      }
+      const solutionVector = result.solutionVector;
+      const femDeflection = Array.from({ length: totalNodesX }, (_, i) => solutionVector[2 * i]);
       const femNodesX = result.nodesCoordinates.nodesXCoordinates;
     });
   &lt;/script&gt;
@@ -336,11 +333,8 @@
         // Extract the deflection field from the solution vector
         // DOF layout per node: [w, theta]
         const totalNodesX = model._eulerBernoulliBeamMetadata.totalNodesX;
-        const flatSolution = result.solutionVector.map((entry) => (Array.isArray(entry) ? entry[0] : entry));
-        const femDeflection = [];
-        for (let i = 0; i < totalNodesX; i++) {
-          femDeflection.push(flatSolution[2 * i]);
-        }
+        const solutionVector = result.solutionVector;
+        const femDeflection = Array.from({ length: totalNodesX }, (_, i) => solutionVector[2 * i]);
         const femNodesX = result.nodesCoordinates.nodesXCoordinates;
 
         // Closed-form analytical solution w(x) = P/(6EI) * (3*L*x^2 - x^3)
