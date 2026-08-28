@@ -27,8 +27,6 @@
     <!-- Link to the CSS files -->
     <link href="../feascript-website.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <!-- Import the Math.js library for mathematical operations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.12.0/math.min.js"></script>
     <!-- Import the run_prettify.js library for JavaScript code coloring *** Deprecated library *** -->
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
@@ -189,8 +187,7 @@
       to render the results:
     </p>
     <pre class="prettyprint">
-import { FEAScriptModel, plotInterpolatedSolutionVtk, createColorScale,
-         createContourLineOptions, printVersion } from "https://core.feascript.com/dist/feascript.esm.js";
+import { FEAScriptModel, plotInterpolatedSolutionVtk, createColorScale, createContourLineOptions, printVersion } from "https://core.feascript.com/dist/feascript.esm.js";
 
 // ...model setup and solve (same as the Plotly tutorial)...
 const result = model.solve();

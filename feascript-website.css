@@ -719,9 +719,9 @@ mjx-container {
 /* Maillist form */
 .waitlist-card {
   display: flex;
-  align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
   max-width: 1000px;
   background: white;
   border-radius: 10px;
@@ -731,17 +731,22 @@ mjx-container {
 }
 
 .waitlist-text {
-  flex: 1;
-  min-width: 240px;
+  width: 100%;
 }
 
 .waitlist-card h2 {
-  margin-top: 0;
+  margin: 0;
+}
+
+.waitlist-disclosure {
+  color: #666;
+  font-size: 0.9em;
+  margin: 6px 0 0;
 }
 
 .waitlist-card form {
-  flex: 1;
-  min-width: 240px;
+  width: 100%;
+  max-width: 360px;
 }
 
 .waitlist-field label {
@@ -822,6 +827,7 @@ mjx-container {
 .studio-layout .left-panel {
   flex: 1;
   padding: 16px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -837,25 +843,6 @@ mjx-container {
 
 .studio-layout .text-content p {
   margin: 0 0 10px 0;
-}
-
-.studio-layout .right-panel {
-  flex: 1.5;
-  position: relative;
-  padding: 16px;
-  background: linear-gradient(135deg, #d4aa00ff, #4d4d4d);
-  border-radius: 0 10px 10px 0;
-  display: flex;
-  align-items: center;
-}
-
-.studio-layout .studio-image {
-  width: 100%;
-  height: auto;
-  border: 10px solid #333;
-  border-radius: 10px;
-  background: #000;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -908,14 +895,6 @@ mjx-container {
 
   .tutorials-list li {
     padding: 10px 12px;
-  }
-
-  .studio-layout .right-panel {
-    display: none !important;
-  }
-
-  .studio-layout .left-panel {
-    border-radius: 10px;
   }
 }
 
